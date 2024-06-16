@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: be5c403d620eee84588b1cc3be450877
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mainCamera: {instanceID: 0}
+  - uiCamera: {instanceID: 0}
+  - canvas: {instanceID: 0}
+  - hitMarkerPrefab: {fileID: 8688348592972520670, guid: 3bed663bde158d4428ef4c67b43e7f8b, type: 3}
+  - ball: {fileID: 2886385993920718188, guid: 15c63694493bc094e8fd6e91c7d529cf, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
