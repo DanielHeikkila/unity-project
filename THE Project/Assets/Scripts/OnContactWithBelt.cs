@@ -37,6 +37,7 @@ public class OnContactWithBelt : MonoBehaviour
                 Rigidbody rb = crate.GetComponent<Rigidbody>();
                 Vector3 horizontalVelocity = direction * speed;
                 rb.velocity = new Vector3(horizontalVelocity.x, rb.velocity.y, horizontalVelocity.z);
+                rb.angularDrag = 10;
             }
         }
         if (isInHold == true && armAnimator.GetBool("boxDropped") == false)
@@ -51,7 +52,7 @@ public class OnContactWithBelt : MonoBehaviour
     {
         if (this.CompareTag("Crate") && other.CompareTag("belts") || this.CompareTag("Crate") && other.CompareTag("Top"))
         {
-            direction = other.gameObject.transform.right;
+            direction = direction + other.gameObject.transform.right;
             GameObject crate = this.gameObject;
             crates.Add(crate);
             isOnBelt = true;
@@ -69,6 +70,7 @@ public class OnContactWithBelt : MonoBehaviour
         }
         if (this.CompareTag("Crate") && other.CompareTag("fall") || this.CompareTag("fall") && other.CompareTag("Crate"))
         {
+            Stop(crateHeld.GetComponent<Rigidbody>());
             crateHeld = null;
             armHold = null;
             isInHold = false;
@@ -99,13 +101,12 @@ public class OnContactWithBelt : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (this.CompareTag("Crate"))
+        if (this.CompareTag("Crate") && !other.CompareTag("arm") && !other.CompareTag("fall") && !other.CompareTag("boxSpawn"))
         {
             direction = direction - other.gameObject.transform.right;
             GameObject crate = this.gameObject;
             Rigidbody rb = crate.GetComponent<Rigidbody>();
-            rb.velocity = direction * halfspeed;
-            Invoke("Stop", 1);
+            rb.angularDrag = 1;
             crates.Remove(crate);
             if (crates.Count == 0)
             {
@@ -117,5 +118,10 @@ public class OnContactWithBelt : MonoBehaviour
     public void Stop(Rigidbody x)
     {
         x.velocity = new Vector3(0, 0, 0);
+    }
+
+    public void SimStart()
+    {
+        armAnimator.SetBool("simStarted", true);
     }
 }

@@ -18,6 +18,8 @@ public class MainUI : MonoBehaviour
     public Canvas canvasEdit;
     public GameObject wall;
     public Vector3 wallLoc = new Vector3(-30.1f, 11.90701f, -26.5f);
+    public Button ButtonWake;
+    public OnContactWithBelt OnContactWithBelt;
 
     void Start()
     {
@@ -25,7 +27,9 @@ public class MainUI : MonoBehaviour
         ButtonRestart.onClick.AddListener(() => TaskOnClick(ButtonRestart.name));
         ButtonEdit.onClick.AddListener(() => TaskOnClick(ButtonEdit.name));
         ButtonStart.onClick.AddListener(() => TaskOnClick(ButtonStart.name));
+        ButtonWake.onClick.AddListener(() => TaskOnClick(ButtonWake.name));
         cameraMovement = FindObjectOfType<CameraMovement>();
+        OnContactWithBelt = FindObjectOfType<OnContactWithBelt>();
     }
 
     void TaskOnClick(string ButtonName)
@@ -44,6 +48,10 @@ public class MainUI : MonoBehaviour
         {
             cameraMovement.Tab();
             Cursor.visible = false;
+        }
+        else if (ButtonName == ButtonWake.name)
+        {
+            OnContactWithBelt.SimStart();
         }
     }
 }

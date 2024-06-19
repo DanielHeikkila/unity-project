@@ -61,7 +61,7 @@ public class EstablishConnection : MonoBehaviour
         {
             cameraMovement.addBelt();
             cameraMovement.Tab();
-            cameraMovement.SetLayerRecursively(cameraMovement.ball, LayerMask.NameToLayer("Ignore Raycast"));
+            cameraMovement.SetLayerRecursively(cameraMovement.ball, LayerMask.NameToLayer("Ignore Raycast")); 
             wall.transform.position = wallLoc;
         }
         else if (ButtonName == ButtonBack.name)
